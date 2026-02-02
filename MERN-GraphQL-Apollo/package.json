@@ -1,0 +1,16 @@
+{
+  "name": "mern-graphql-apollo",
+  "version": "1.0.0",
+  "description": "I built a project management admin application using the MERN stack (MongoDB, Express, React, and Node.js).",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node server/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
