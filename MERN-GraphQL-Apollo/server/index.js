@@ -1,6 +1,8 @@
-import express from 'express'
+import { startApolloServer } from './app.js';
+import { typeDefs } from './graphql/typeDefs.js';
+import { resolvers } from './graphql/resolvers.js';
+import { connectDB } from './db.js';
 
-const app = express()
+connectDB();
 
-app.listen(3000)
-console.log('Server on port 3000')
+startApolloServer(typeDefs, resolvers);
