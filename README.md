@@ -1,4 +1,4 @@
-# 🚀 Daily Coding Practice
+# 🚀 Coding Practice
 
 This repository contains my programming practice.
 
@@ -8,6 +8,6 @@ The goal of this challenge is to improve my problem-solving skills, strengthen m
 
 ## 📌 Structure
 
-Each folder represents one day of practice and contains:
+Each folder contains:
 - The source code for the exercise
 - A dedicated README with a brief explanation
