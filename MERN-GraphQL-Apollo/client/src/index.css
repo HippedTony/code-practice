@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+body {
+  background-color: #202020;
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #202020;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #333333;
+  border-radius: 10px;
+
+  :hover {
+    background-color: #7e7e7e;
+  }
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #424242;
+}
+
+svg, button {
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
