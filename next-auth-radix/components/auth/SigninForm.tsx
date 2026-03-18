@@ -2,6 +2,7 @@
 import { EnvelopeClosedIcon, LockClosedIcon } from '@radix-ui/react-icons';
 import { Button, Flex, Text, TextField } from '@radix-ui/themes';
 import { Controller, useForm } from 'react-hook-form';
+import { signIn } from 'next-auth/react';
 
 function SigninForm() {
   const {
@@ -15,8 +16,17 @@ function SigninForm() {
     },
   });
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit(async (data) => {
     console.log(data);
+    const res = await signIn('credentials', {
+      email: data.email,
+      password: data.password,
+      callbackUrl: '/dashboard'
+    });
+
+    if (!res?.ok) {
+      console.log(res);
+    }
   });
 
   return (
