@@ -1,3 +1,10 @@
-export { default } from "next-auth/middleware"
+import { NextResponse, NextRequest } from 'next/server';
 
-export const config = { matcher: ["/dashboard"] }
+// This function can be marked `async` if using `await` inside
+export function proxy(request: NextRequest) {
+  return NextResponse.redirect(new URL('/api/auth/signin', request.url));
+}
+
+export const config = {
+  matcher: ['/dashboard'],
+};
