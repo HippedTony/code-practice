@@ -1,4 +1,5 @@
 'use client';
+import { TrashIcon } from '@radix-ui/react-icons';
 import {
   Button,
   Card,
@@ -10,6 +11,7 @@ import {
   Text,
 } from '@radix-ui/themes';
 import axios from 'axios';
+import { useRouter, useParams } from 'next/navigation';
 import { useForm, Controller } from 'react-hook-form';
 
 function TaskNewPage() {
@@ -23,10 +25,18 @@ function TaskNewPage() {
       description: '',
     },
   });
+  const router = useRouter();
+  const params = useParams();
 
   const onSubmit = handleSubmit(async (data) => {
-    const res = await axios.post('/api/projects', data);
-    console.log(res);
+    if (!params.projectId) {
+      const res = await axios.post('/api/projects', data);
+      if (res.status === 201) {
+        router.push('/dashboard');
+      }
+    } else {
+      console.log('editing');
+    }
   });
 
   return (
@@ -34,7 +44,9 @@ function TaskNewPage() {
       <Flex className="h-screen w-full items-center">
         <Card className="w-full">
           <form className="flex flex-col gap-y-2" onSubmit={onSubmit}>
-            <Heading>Create Project</Heading>
+            <Heading>
+              {params.projectId ? 'Edit Project' : 'New Project'}
+            </Heading>
 
             <label htmlFor="title">Project title</label>
             <Controller
@@ -42,7 +54,7 @@ function TaskNewPage() {
               control={control}
               rules={{
                 required: {
-                  message: 'Tittle is required',
+                  message: 'Title is required',
                   value: true,
                 },
               }}
@@ -67,13 +79,35 @@ function TaskNewPage() {
             <Controller
               name="description"
               control={control}
+              rules={{
+                required: {
+                  message: 'Description is required',
+                  value: true,
+                },
+              }}
               render={({ field }) => {
                 return <TextArea placeholder="Project title..." {...field} />;
               }}
             />
+            {errors.description && (
+              <Text color="ruby" className="text-sm">
+                {errors.description.message}
+              </Text>
+            )}
 
-            <Button>Create project</Button>
+            <Button>
+              {params.projectId ? 'Update Project' : 'Create Project'}
+            </Button>
           </form>
+
+          <div className="flex justify-end mt-4">
+            {params.projectId && (
+              <Button color="ruby">
+                <TrashIcon />
+                Delete Project
+              </Button>
+            )}
+          </div>
         </Card>
       </Flex>
     </Container>

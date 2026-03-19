@@ -1,18 +1,31 @@
-'use client';
-import { Button, Container, Flex, Heading } from '@radix-ui/themes';
-import { useRouter } from 'next/navigation';
+import HeaderDashboard from '@/components/dashboard/HeaderDashboard';
+import { prisma } from '@/libs/prisma';
+import { Container, Grid } from '@radix-ui/themes';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '../api/auth/[...nextauth]/route';
+import ProjectCard from '@/components/projects/ProjectCard';
 
-function DashboardPage() {
-  const router = useRouter();
+async function loadProjects(userId: number) {
+  return await prisma.project.findMany({
+    where: {
+      userId,
+    },
+  });
+}
+
+async function DashboardPage() {
+  const session = await getServerSession(authOptions);
+  const projects = await loadProjects(parseInt(session?.user.id as string));
 
   return (
     <Container className="mt-10">
-      <Flex justify="between">
-        <Heading>Tasks</Heading>
-        <Button onClick={() => router.push('/dashboard/tasks/new')}>
-          Add Project
-        </Button>
-      </Flex>
+      <HeaderDashboard />
+
+      <Grid columns="3" gap="4">
+        {projects.map((project) => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
+      </Grid>
     </Container>
   );
 }
