@@ -1,6 +1,6 @@
 import SigninForm from '@/components/auth/SigninForm';
 import { Card, Container, Flex, Heading, Text, Link } from '@radix-ui/themes';
-import NavLink from 'next/link';
+import NextLink from 'next/link';
 
 function LoginPage() {
   return (
@@ -14,7 +14,7 @@ function LoginPage() {
             <Flex justify="between" my="4">
               <Text>Don't have an account?</Text>
               <Link asChild>
-                <NavLink href="/auth/register" passHref>Sign Up</NavLink>
+                <NextLink href="/auth/register" passHref>Sign Up</NextLink>
               </Link>
             </Flex>
           </Card>
