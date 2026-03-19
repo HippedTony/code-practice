@@ -12,13 +12,16 @@ import {
 } from '@radix-ui/themes';
 import axios from 'axios';
 import { useRouter, useParams } from 'next/navigation';
+import { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { toast } from 'sonner';
 
 function TaskNewPage() {
   const {
     control,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     defaultValues: {
       title: '',
@@ -26,18 +29,42 @@ function TaskNewPage() {
     },
   });
   const router = useRouter();
-  const params = useParams();
+  const params = useParams() as { projectId: string };
 
   const onSubmit = handleSubmit(async (data) => {
     if (!params.projectId) {
       const res = await axios.post('/api/projects', data);
       if (res.status === 201) {
         router.push('/dashboard');
+        router.refresh();
       }
     } else {
-      console.log('editing');
+      const res = await axios.put(`/api/projects/${params.projectId}`, data);
+      if (res.status === 200) {
+        router.push('/dashboard');
+        router.refresh();
+      }
     }
   });
+
+  const handleDelete = async (projectId: string) => {
+    const res = await axios.delete(`/api/projects/${projectId}`);
+
+    if (res.status === 200) {
+      toast.success('Project deleted successfully');
+    }
+    router.push('/dashboard');
+    router.refresh();
+  };
+
+  useEffect(() => {
+    if (params.projectId) {
+      axios.get(`/api/projects/${params.projectId}`).then((res) => {
+        setValue('title', res.data.title);
+        setValue('description', res.data.description);
+      });
+    }
+  }, []);
 
   return (
     <Container className="p-3 md:p-0" size="1" height="100%">
@@ -102,7 +129,10 @@ function TaskNewPage() {
 
           <div className="flex justify-end mt-4">
             {params.projectId && (
-              <Button color="ruby">
+              <Button
+                color="ruby"
+                onClick={() => handleDelete(params.projectId)}
+              >
                 <TrashIcon />
                 Delete Project
               </Button>
