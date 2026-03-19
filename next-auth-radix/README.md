@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js 14 Fullstack Auth App
 
-## Getting Started
+## 📖 Description
 
-First, run the development server:
+This project is a fullstack web application built using **Next.js** and **TypeScript**.
+
+It demonstrates how to implement authentication and authorization using **NextAuth**, along with route protection, form validation, and full **CRUD (Create, Read, Update, Delete)** functionality.
+
+The backend uses **Prisma ORM** with a **SQLite** database for data persistence. The frontend is built using **Radix UI**, providing accessible and customizable pre-built components to accelerate development.
+
+---
+
+## 🛠️ Tech Stack
+
+* TypeScript
+* Next.js 14 (App Router)
+* NextAuth (Authentication)
+* Prisma (ORM)
+* SQLite (Database)
+* Radix UI (UI Components)
+* React
+
+---
+
+## 🔐 Features
+
+* User authentication with NextAuth
+* Protected routes and access control
+* CRUD operations
+* Form validation
+* Database management with Prisma
+* Reusable UI components with Radix UI
+
+---
+
+## ⚙️ Getting Started
+
+### Prerequisites
+
+* Node.js
+* npm
+
+---
+
+## 🚀 Installation
+
+1. Clone the repository
+
+```bash
+git clone <your-repo-url>
+cd project-name
+```
+
+2. Install dependencies
+
+```bash
+npm install
+```
+
+---
+
+## 🔑 Environment Variables
+
+Create a `.env` file in the root directory and add:
+
+```env
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=secret
+DATABASE_URL="file:./dev.db"
+```
+
+---
+
+## 🗄️ Database Setup (Prisma)
+
+Run the following commands to set up the database:
+
+```bash
+npx prisma migrate dev
+```
+
+(Optional) Open Prisma Studio:
+
+```bash
+npx prisma studio
+```
+
+---
+
+## ▶️ Running the Project
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+http://localhost:3000
+```
