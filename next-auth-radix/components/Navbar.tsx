@@ -14,7 +14,7 @@ function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <nav className="bg-zinc-950 py-4">
+    <nav className="bg-zinc-950 py-4 px-10 md:px-0">
       <Container>
         <Flex justify="between" align="center">
           <NextLink href="/">

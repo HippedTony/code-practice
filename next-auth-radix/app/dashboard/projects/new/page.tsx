@@ -68,7 +68,7 @@ function TaskNewPage() {
 
   return (
     <Container className="p-3 md:p-0" size="1" height="100%">
-      <Flex className="h-screen w-full items-center">
+      <Flex className="w-full h-[calc(100vh-10rem)] items-center">
         <Card className="w-full">
           <form className="flex flex-col gap-y-2" onSubmit={onSubmit}>
             <Heading>
