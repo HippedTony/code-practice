@@ -10,7 +10,7 @@ function DashboardPage() {
       <Flex justify="between">
         <Heading>Tasks</Heading>
         <Button onClick={() => router.push('/dashboard/tasks/new')}>
-          Add task
+          Add Project
         </Button>
       </Flex>
     </Container>

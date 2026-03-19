@@ -9,6 +9,7 @@ import {
   TextField,
   Text,
 } from '@radix-ui/themes';
+import axios from 'axios';
 import { useForm, Controller } from 'react-hook-form';
 
 function TaskNewPage() {
@@ -24,7 +25,8 @@ function TaskNewPage() {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    return null
+    const res = await axios.post('/api/projects', data);
+    console.log(res);
   });
 
   return (
