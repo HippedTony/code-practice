@@ -1,7 +1,7 @@
 import {
   Alert,
-  Button,
   Image,
+  ImageBackground,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import * as ImagePicker from 'expo-image-picker';
+import * as Sharing from 'expo-sharing';
 import { useState } from 'react';
 
 export default function HomeScreen() {
@@ -32,26 +33,48 @@ export default function HomeScreen() {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
   };
 
+  const openShareDialog = async () => {
+    if (!(await Sharing.isAvailableAsync())) {
+      alert('Sharing is not available on your platform.');
+      return;
+    }
+
+    await Sharing.shareAsync(image!);
+  };
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.title}>Hello World!</Text>
-        <Image
-          style={styles.image}
-          source={
-            image ? { uri: image } : require('@/assets/images/react-logo.png')
-          }
-        />
-        <TouchableOpacity style={styles.button} onPress={pickImage}>
-          <Text style={styles.buttonText}>Press me</Text>
-        </TouchableOpacity>
+        <ImageBackground
+          source={require('@/assets/images/iced-coffee.png')}
+          resizeMode="cover"
+          style={styles.backgroundImage}
+        >
+          <Text style={styles.title}>Pick an image</Text>
+          <TouchableOpacity onPress={pickImage}>
+            <Image
+              style={styles.image}
+              source={
+                image
+                  ? { uri: image }
+                  : require('@/assets/images/react-logo.png')
+              }
+            />
+          </TouchableOpacity>
+
+          {image ? (
+            <TouchableOpacity style={styles.button} onPress={openShareDialog}>
+              <Text style={styles.buttonText}>Share</Text>
+            </TouchableOpacity>
+          ) : (
+            <View />
+          )}
+        </ImageBackground>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -60,25 +83,33 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  backgroundImage: {
+    width: '100%',
+    height: '100%',
+    flex: 1,
+    resizeMode: 'cover',
     alignItems: 'center',
+    justifyContent: 'center'
   },
   title: {
+    width: '100%',
+    textAlign: 'center',
     fontSize: 30,
     color: 'white',
-    marginTop: 10,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
   image: {
     width: 200,
     height: 200,
-    backgroundColor: 'white',
     borderRadius: 100,
-    marginTop: 10,
+    marginVertical: 10,
   },
   button: {
-    backgroundColor: 'purple',
-    padding: 10,
-    marginTop: 10,
-    borderRadius: 12,
+    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 20,
   },
   buttonText: {
     fontSize: 20,

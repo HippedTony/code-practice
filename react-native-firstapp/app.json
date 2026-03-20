@@ -4,7 +4,7 @@
     "slug": "react-native-firstapp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/coffee-icon.png",
     "scheme": "reactnativefirstapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -30,9 +30,9 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/coffee-splash.png",
           "imageWidth": 200,
-          "resizeMode": "contain",
+          "resizeMode": "cover",
           "backgroundColor": "#ffffff",
           "dark": {
             "backgroundColor": "#000000"
