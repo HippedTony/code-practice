@@ -21,7 +21,7 @@ A Java Spring Boot backend application for managing a collection of books. This 
 
 1. Clone the repository:
   ```
-  git clone https://github.com/yourusername/book-api.git
+  git clone https://github.com/HippedTony/book-api.git
   cd book-api
   ```
 
