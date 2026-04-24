@@ -44,6 +44,10 @@ A React application built with Vite and TypeScript that interacts with a Java Sp
 - The app connects to the Spring Boot backend API to retrieve, add, and update books.
 - Ensure the backend is running and accessible.
 
+## Backend Integration
+
+This frontend uses this project [Book Backend_API](https://github.com/HippedTony/code-practice/tree/main/book-api). Refer to its repository for the backend implementation.
+
 ## Known Bugs
 
 - Cannot update the image of a book.
